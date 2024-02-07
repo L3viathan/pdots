@@ -6,17 +6,17 @@ from itertools import count
 @contextmanager
 def dots(every=1):
     def _dots():
-        c = count()
         while True:
             for i, char in enumerate("⠁⠃⠇⡇⣇⣧⣷⣿"):
-                if next(c) % every == 0:
-                    if i:
-                        yield f"\x08{char}"
-                    else:
-                        yield char
+                if i:
+                    yield f"\x08{char}"
+                else:
+                    yield char
     d = _dots()
+    c = count()
     def step():
-        print(next(d), end="", flush=True, file=sys.stderr)
+        if next(c) % every == 0:
+            print(next(d), end="", flush=True, file=sys.stderr)
     try:
         print("\x1b[?25l", end="", flush=True, file=sys.stderr)
         yield step
