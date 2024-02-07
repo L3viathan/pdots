@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pdots"
-version = "0.1.1"
+version = "0.2.0"
 description = "Progress dots"
 authors = ["L3viathan <git@l3vi.de>"]
 readme = "README.md"
