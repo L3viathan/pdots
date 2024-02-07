@@ -1,3 +1,4 @@
+import sys
 from time import sleep
 from contextlib import contextmanager
 
@@ -12,12 +13,12 @@ def dots():
                     yield char
     d = _dots()
     def step():
-        print(next(d), end="", flush=True)
+        print(next(d), end="", flush=True, file=sys.stderr)
     try:
-        print("\x1b[?25l", end="", flush=True)
+        print("\x1b[?25l", end="", flush=True, file=sys.stderr)
         yield step
     finally:
-        print("\x1b[?25h", end="", flush=True)
+        print("\x1b[?25h", end="", flush=True, file=sys.stderr)
 
 
 if __name__ == "__main__":
