@@ -1,16 +1,19 @@
 import sys
 from time import sleep
 from contextlib import contextmanager
+from itertools import count
 
 @contextmanager
-def dots():
+def dots(every=1):
     def _dots():
+        c = count()
         while True:
             for i, char in enumerate("⠁⠃⠇⡇⣇⣧⣷⣿"):
-                if i:
-                    yield f"\x08{char}"
-                else:
-                    yield char
+                if next(c) % every == 0:
+                    if i:
+                        yield f"\x08{char}"
+                    else:
+                        yield char
     d = _dots()
     def step():
         print(next(d), end="", flush=True, file=sys.stderr)
