@@ -5,6 +5,9 @@ from itertools import count
 
 @contextmanager
 def dots(every=1):
+    if not sys.stderr.isatty():
+        yield lambda: None
+        return
     def _dots():
         while True:
             for i, char in enumerate("⠁⠃⠇⡇⣇⣧⣷⣿"):
